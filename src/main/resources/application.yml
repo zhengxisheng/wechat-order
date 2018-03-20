@@ -1,0 +1,15 @@
+#\u6570\u636E\u5E93\u914D\u7F6E
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: root
+    url: jdbc:mysql://192.168.149.128/sell?characterEncoding=utf-8&useSSL=false
+
+#jpa sql\u683C\u5F0F\u5316
+jpa:
+  show-sql: true
+
+#\u8BF7\u6C42\u8DEF\u5F84\u524D\u7F00\u914D\u7F6E
+server:
+  context-path: /sell

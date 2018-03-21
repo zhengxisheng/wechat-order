@@ -4,6 +4,7 @@ import lombok.Getter;
 
 /**
  * Created by fanlinglong on 2018/3/20.
+ * 产品状态枚举类
  */
 @Getter
 public enum ProductStatusEnum {

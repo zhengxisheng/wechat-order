@@ -11,6 +11,7 @@ import java.util.Date;
 
 /**
  * Created by fanlinglong on 2018/3/20.
+ * 类目实体
  */
 @Entity
 @Data
@@ -28,7 +29,9 @@ public class ProductCategory {
     /** 类目编号*/
     private Integer categoryType;
 
+    /** 创建时间*/
     private Date createTime;
 
+    /** 修改时间*/
     private Date updateTime;
 }

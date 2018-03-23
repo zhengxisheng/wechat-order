@@ -5,6 +5,8 @@ import com.xisheng.dto.CartDTO;
 import com.xisheng.dto.OrderDTO;
 import com.xisheng.enums.OrderStatusEnum;
 import com.xisheng.enums.PayStatusEnum;
+import com.xisheng.enums.ResultEnum;
+import com.xisheng.exception.SellException;
 import com.xisheng.pojo.OrderDetail;
 import com.xisheng.pojo.OrderMaster;
 import com.xisheng.pojo.ProductInfo;
@@ -37,6 +39,11 @@ public class OrderServiceImpl implements OrderService{
     private OrderDetailDao orderDetailDao;
 
 
+    /**
+     *  创建订单
+     * @param orderDTO orderDetail实体类传产品Id,数量
+     * @return
+     */
     @Transactional
     @Override
     public OrderDTO create(OrderDTO orderDTO) {
@@ -49,7 +56,7 @@ public class OrderServiceImpl implements OrderService{
         for (OrderDetail orderDetail : orderDTO.getOrderDetailList()){
             ProductInfo productInfo = productService.findOne(orderDetail.getProductId());
             if (productInfo == null){
-
+                throw new SellException(ResultEnum.PRODUCT_NOT_EXIST);
             }
             //2.计算订单总价
             orderAmout = productInfo.getProductPrice()

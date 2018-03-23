@@ -3,6 +3,8 @@ package com.xisheng.service.impl;
 import com.xisheng.dao.ProductInfoDao;
 import com.xisheng.dto.CartDTO;
 import com.xisheng.enums.ProductStatusEnum;
+import com.xisheng.enums.ResultEnum;
+import com.xisheng.exception.SellException;
 import com.xisheng.pojo.ProductInfo;
 import com.xisheng.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,11 +39,11 @@ public class ProductServiceImpl implements ProductService{
         for (CartDTO cartDTO : cartDTOList){
             ProductInfo productInfo = productInfoDao.findOne(cartDTO.getProductId());
             if (productInfo == null){
-
+                throw new SellException(ResultEnum.PRODUCT_NOT_EXIST);
             }
             Integer result = productInfo.getProductStock() - cartDTO.getProductQuantity();
             if (result < 0){
-
+                throw new SellException(ResultEnum.PRODUCT_STOCK_ERROR);
             }
             productInfo.setProductStock(result);
             productInfo.setUpdateTime(new Date());

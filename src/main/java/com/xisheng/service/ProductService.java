@@ -28,4 +28,10 @@ public interface ProductService {
      * @param cartDTOList 购物车信息
      */
     void decreaseStock(List<CartDTO> cartDTOList);
+
+    /**
+     * 增加库存
+     * @param cartDTOList
+     */
+    void increaseStock(List<CartDTO> cartDTOList);
 }

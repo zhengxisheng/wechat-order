@@ -60,6 +60,7 @@ public class ProductServiceImpl implements ProductService{
             }
             Integer result = productInfo.getProductStock() + cartDTO.getProductQuantity();
             productInfo.setProductStock(result);
+            productInfo.setUpdateTime(new Date());
             productInfoDao.save(productInfo);
         }
     }

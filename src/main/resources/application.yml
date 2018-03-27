@@ -1,18 +1,17 @@
-#\u6570\u636E\u5E93\u914D\u7F6E
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     username: root
     password: root
     url: jdbc:mysql://192.168.149.128/sell?characterEncoding=utf-8&useSSL=false
-  #\u663E\u793A\u5E76\u683C\u5F0F\u5316sql
   jpa:
     show-sql: true
     properties:
       hibernate:
         format_sql: true
-#\u8BF7\u6C42\u8DEF\u5F84\u524D\u7F00\u914D\u7F6E
+  #序列对象是null值不显示字段
+  jackson:
+    default-property-inclusion: non_null
 server:
-  servlet:
-    context-path: /sell
+  context-path: /sell
 

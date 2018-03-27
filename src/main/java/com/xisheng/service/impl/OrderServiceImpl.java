@@ -84,6 +84,7 @@ public class OrderServiceImpl implements OrderService{
         orderMaster.setOrderStatus(OrderStatusEnum.NEW.getCode());
         orderMaster.setPayStatus(PayStatusEnum.WAIT.getCode());
         orderMaster.setUpdateTime(new Date());
+        orderMasterDao.save(orderMaster);
         //jdk1.8新特性 lambda
         List<CartDTO> orderDTOList = orderDTO.getOrderDetailList().stream().map(e ->
                                         new CartDTO(e.getProductId(),e.getProductQuantity())
@@ -122,12 +123,13 @@ public class OrderServiceImpl implements OrderService{
     public OrderDTO cancel(OrderDTO orderDTO) {
         OrderMaster orderMaster = new OrderMaster();
         //判断订单状态
-        if (!orderDTO.getOrderStatus().equals(OrderStatusEnum.NEW)){
+        if (!orderDTO.getOrderStatus().equals(OrderStatusEnum.NEW.getCode())){
             log.error("[取消订单]订单状态不正确,orderId={},orderStatus={}",orderDTO.getOrderId(),orderDTO.getOrderStatus());
             throw new SellException(ResultEnum.ORDER_STATUS_ERROR);
         }
         //修改订单状态
         orderDTO.setOrderStatus(OrderStatusEnum.CANCEL.getCode());
+        orderDTO.setUpdateTime(new Date());
         BeanUtils.copyProperties(orderDTO,orderMaster);
         OrderMaster updataResult = orderMasterDao.save(orderMaster);
         if (updataResult == null){

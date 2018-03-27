@@ -6,6 +6,7 @@ import com.xisheng.dto.OrderDTO;
 import com.xisheng.enums.ResultEnum;
 import com.xisheng.exception.SellException;
 import com.xisheng.form.OrderForm;
+import com.xisheng.service.BuyerService;
 import com.xisheng.service.OrderService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.CollectionUtils;
@@ -32,6 +33,9 @@ public class BuyerOrderController {
 
     @Autowired
     private OrderService orderService;
+
+    @Autowired
+    private BuyerService buyerService;
     /**
      * 创建订单
      * @param orderForm  订单Form
@@ -77,6 +81,38 @@ public class BuyerOrderController {
         PageRequest pageRequest = new PageRequest(page,size);
         Page<OrderDTO> orderDTOPage = orderService.findList(openid, pageRequest);
         return ServerResponse.createBySuccess(orderDTOPage.getContent());
+    }
+
+    /**
+     * 订单详情
+     * @param openid 微信openid
+     * @param orderId 订单Id
+     * @return
+     */
+    @GetMapping("/detail")
+    public ServerResponse<OrderDTO> detail(@RequestParam("openid") String openid,@RequestParam("orderId") String orderId){
+        if (StringUtils.isEmpty(openid)||StringUtils.isEmpty(orderId)){
+            log.error("【查询订单详情】参数错误,openid={},orderId={}",openid,orderId);
+            throw new SellException(ResultEnum.PARAM_ERROR);
+        }
+        OrderDTO orderDTO = buyerService.findOrderOne(openid,orderId);
+        return ServerResponse.createBySuccess(orderDTO);
+    }
+
+    /**
+     * 取消订单
+     * @param openid 微信openId
+     * @param orderId 订单Id
+     * @return
+     */
+    @PostMapping("/cancel")
+    public ServerResponse cancel(@RequestParam("openid") String openid,@RequestParam("orderId") String orderId){
+        if (StringUtils.isEmpty(openid)||StringUtils.isEmpty(orderId)){
+            log.error("【取消订单】参数错误,openid={},orderId={}",openid,orderId);
+            throw new SellException(ResultEnum.PARAM_ERROR);
+        }
+        buyerService.cancelOrder(openid,orderId);
+        return ServerResponse.createBySuccess();
     }
 
 }

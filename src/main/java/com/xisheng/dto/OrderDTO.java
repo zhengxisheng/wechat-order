@@ -1,6 +1,11 @@
 package com.xisheng.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.xisheng.enums.OrderStatusEnum;
+import com.xisheng.enums.PayStatusEnum;
 import com.xisheng.pojo.OrderDetail;
+import com.xisheng.utils.EnumUtil;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -30,10 +35,22 @@ public class OrderDTO {
     private Integer orderStatus;
     /** 付款状态 默认为0未支付*/
     private Integer payStatus;
+
     /** 创建时间*/
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date createTime;
+
     /** 修改时间*/
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date updateTime;
 
     List<OrderDetail> orderDetailList;
+
+    public String getOrderStatus() {
+        return EnumUtil.getByCode(orderStatus,OrderStatusEnum.class);
+    }
+
+    public String getPayStatus() {
+        return EnumUtil.getByCode(payStatus, PayStatusEnum.class);
+    }
 }

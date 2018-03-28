@@ -74,6 +74,8 @@ public class OrderServiceImpl implements OrderService{
             orderDetail.setDetailId(KeyUtil.getUniqueKey());
             orderDetail.setOrderId(orderId);
             BeanUtils.copyProperties(productInfo,orderDetail);
+            orderDetail.setCreateTime(new Date());
+            orderDetail.setUpdateTime(new Date());
             orderDetailDao.save(orderDetail);
         }
         //3.写入订单表(orderMaster和orderDetail)

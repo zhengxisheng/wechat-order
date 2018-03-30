@@ -28,6 +28,8 @@ public enum ResultEnum {
 
     ORDER_OWNER_ERROR(19, "该订单不属于当前用户"),
 
+    WECHAT_MP_ERROR(20, "微信公众账号方面错误"),
+
     ;
 
     private Integer code;

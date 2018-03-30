@@ -16,6 +16,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import javax.validation.Valid;
 import java.util.HashMap;
@@ -114,5 +115,15 @@ public class BuyerOrderController {
         buyerService.cancelOrder(openid,orderId);
         return ServerResponse.createBySuccess();
     }
+
+//    @GetMapping("/auth")
+//    public void auth(@RequestParam("code") String code){
+//        log.info("进入auth方法");
+//        log.info("code={}",code);
+//        String url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx78958c2d928a386e&secret=4b0086ebebd3acdd0ffc498e2d88647e&code="+code+"&grant_type=authorization_code";
+//        RestTemplate restTemplate = new RestTemplate();
+//        String response = restTemplate.getForObject(url,String.class);
+//        log.info("response={}",response);
+//    }
 
 }

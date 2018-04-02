@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -36,6 +37,17 @@ public class ProductCategoryDaoTest {
         List<Integer> list = Arrays.asList(2,3,4);
         List<ProductCategory> result = productCategoryDao.findByCategoryTypeIn(list);
         Assert.assertNotEquals(0,result.size());
+    }
+    @Test
+    public void testDouble(){
+        Double a1 = 0.01;
+        BigDecimal a2 = new BigDecimal("0.01");
+        if (a1.doubleValue() == a2.doubleValue()){
+            System.out.println("a1==a2");
+        }
+        else {
+            System.out.println("a1!=a2");
+        }
     }
 
 }

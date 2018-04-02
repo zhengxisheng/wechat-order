@@ -116,7 +116,6 @@ public class JsonUtil {
 //        user.setCreateTime(new Date());
 //        User user2 = new User();
 //        user2.setId(2);
-//        user2.setUsername("test");
 //        List<User> userList = Lists.newArrayList();
 //        userList.add(user);
 //        userList.add(user2);

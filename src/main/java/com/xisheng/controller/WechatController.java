@@ -37,7 +37,7 @@ public class WechatController {
          returnUrl = "http://" + returnUrl;
 
         //调用方法
-        String url = "http://deghir.natappfree.cc/sell/wechat/userInfo";
+        String url = "http://uap59p.natappfree.cc/sell/wechat/userInfo";
         //获取code
         String redirectUrl = wxMpService.oauth2buildAuthorizationUrl(url, WxConsts.OAUTH2_SCOPE_BASE, URLEncoder.encode(returnUrl));
         //重定向

@@ -30,6 +30,8 @@ public enum ResultEnum {
 
     WECHAT_MP_ERROR(20, "微信公众账号方面错误"),
 
+    WXPAY_NOTIFY_MONEY_VERIFY_ERROR(21,"微信异步通知异常"),
+
     ;
 
     private Integer code;

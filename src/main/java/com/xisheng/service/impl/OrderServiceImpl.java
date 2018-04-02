@@ -13,6 +13,7 @@ import com.xisheng.pojo.OrderDetail;
 import com.xisheng.pojo.OrderMaster;
 import com.xisheng.pojo.ProductInfo;
 import com.xisheng.service.OrderService;
+import com.xisheng.service.PayService;
 import com.xisheng.service.ProductService;
 import com.xisheng.utils.KeyUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -46,6 +47,9 @@ public class OrderServiceImpl implements OrderService{
 
     @Autowired
     private OrderMasterDao orderMasterDao;
+
+    @Autowired
+    private PayService payService;
 
 
     /**
@@ -148,7 +152,10 @@ public class OrderServiceImpl implements OrderService{
                 .map(e -> new CartDTO(e.getProductId(),e.getProductQuantity()))
                 .collect(Collectors.toList());
         productService.increaseStock(cartDTOList);
-        //如果已支付,需执行退款操作 TODO
+        //如果已支付,需执行退款操作
+        if (orderDTO.getPayStatus().equals(PayStatusEnum.SUCCESS.getCode())){
+            payService.refund(orderDTO);
+        }
         return orderDTO;
 
     }

@@ -46,11 +46,13 @@ public class OrderDTO {
 
     List<OrderDetail> orderDetailList;
 
-    public String getOrderStatus() {
+    @JsonIgnore
+    public String getOrderStatusEnum() {
         return EnumUtil.getByCode(orderStatus,OrderStatusEnum.class);
     }
 
-    public String getPayStatus() {
+    @JsonIgnore
+    public String getPayStatusEnum() {
         return EnumUtil.getByCode(payStatus, PayStatusEnum.class);
     }
 }

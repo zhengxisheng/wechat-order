@@ -153,9 +153,9 @@ public class OrderServiceImpl implements OrderService{
                 .collect(Collectors.toList());
         productService.increaseStock(cartDTOList);
         //如果已支付,需执行退款操作
-        if (orderDTO.getPayStatus().equals(PayStatusEnum.SUCCESS.getCode())){
-            payService.refund(orderDTO);
-        }
+//        if (orderDTO.getPayStatus().equals(PayStatusEnum.SUCCESS.getCode())){
+//            payService.refund(orderDTO);
+//        }
         return orderDTO;
 
     }
@@ -200,5 +200,12 @@ public class OrderServiceImpl implements OrderService{
             throw new SellException(ResultEnum.ORDER_UPDATE_FAIL);
         }
         return orderDTO;
+    }
+
+    @Override
+    public Page<OrderDTO> findList(Pageable pageable) {
+        Page<OrderMaster> orderMasterPage = orderMasterDao.findAll(pageable);
+        List<OrderDTO> orderDTOList = OrderMaster2OrderDTO.convert(orderMasterPage.getContent());
+        return new PageImpl<>(orderDTOList,pageable,orderMasterPage.getTotalElements());
     }
 }

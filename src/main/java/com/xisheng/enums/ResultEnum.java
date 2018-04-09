@@ -32,6 +32,10 @@ public enum ResultEnum {
 
     WXPAY_NOTIFY_MONEY_VERIFY_ERROR(21,"微信异步通知异常"),
 
+    ORDER_CANCEL_SUCCESS(22,"取消订单成功"),
+
+    ORDER_FINISH_SUCCESS(23,"完结订单成功"),
+
     ;
 
     private Integer code;

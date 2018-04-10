@@ -7,7 +7,7 @@
         <div id="page-content-wrapper">
             <div class="container">
                 <div class="row clearfix">
-                    <div class="col-md-12 column">
+                    <div class="col-md-14 column">
                         <table class="table table-striped">
                             <thead>
                             <tr>

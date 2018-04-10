@@ -8,6 +8,8 @@ import com.xisheng.exception.SellException;
 import com.xisheng.pojo.ProductInfo;
 import com.xisheng.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -63,5 +65,43 @@ public class ProductServiceImpl implements ProductService{
             productInfo.setUpdateTime(new Date());
             productInfoDao.save(productInfo);
         }
+    }
+
+    @Override
+    public Page<ProductInfo> findAll(Pageable pageable) {
+        return productInfoDao.findAll(pageable);
+    }
+
+    @Override
+    public ProductInfo onSale(String productId) {
+        ProductInfo productInfo = productInfoDao.findOne(productId);
+        if (productInfo == null){
+            throw new SellException(ResultEnum.PRODUCT_NOT_EXIST);
+        }
+        if (productInfo.getProductStatus()== ProductStatusEnum.UP.getCode()){
+            throw new SellException(ResultEnum.PRODUCT_STATUS_ERROR);
+        }
+        productInfo.setProductStatus(ProductStatusEnum.UP.getCode());
+        productInfo.setUpdateTime(new Date());
+        return productInfoDao.save(productInfo);
+    }
+
+    @Override
+    public ProductInfo offSale(String productId) {
+        ProductInfo productInfo = productInfoDao.findOne(productId);
+        if (productInfo == null){
+            throw new SellException(ResultEnum.PRODUCT_NOT_EXIST);
+        }
+        if (productInfo.getProductStatus() == ProductStatusEnum.DOWN.getCode()){
+            throw new SellException(ResultEnum.PRODUCT_STATUS_ERROR);
+        }
+        productInfo.setProductStatus(ProductStatusEnum.DOWN.getCode());
+        productInfo.setUpdateTime(new Date());
+        return productInfoDao.save(productInfo);
+    }
+
+    @Override
+    public ProductInfo save(ProductInfo productInfo) {
+        return productInfoDao.save(productInfo);
     }
 }

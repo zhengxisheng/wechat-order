@@ -1,6 +1,8 @@
 package com.xisheng.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.xisheng.enums.ProductStatusEnum;
+import com.xisheng.utils.EnumUtil;
 import lombok.Data;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -48,5 +50,8 @@ public class ProductInfo {
     /** 修改时间*/
     private Date updateTime;
 
-
+    @JsonIgnore
+    public String getProductStatusEnum(){
+        return EnumUtil.getByCode(productStatus,ProductStatusEnum.class);
+    }
 }

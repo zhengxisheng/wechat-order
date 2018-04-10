@@ -10,4 +10,6 @@ import java.util.List;
 public interface CategoryService {
 
     List<ProductCategory> findByCategoryTypeIn(List<Integer> categoryList);
+
+    List<ProductCategory> findAll();
 }

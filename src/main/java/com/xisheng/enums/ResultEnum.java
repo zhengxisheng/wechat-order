@@ -36,6 +36,8 @@ public enum ResultEnum {
 
     ORDER_FINISH_SUCCESS(23,"完结订单成功"),
 
+    PRODUCT_STATUS_ERROR(24,"商品状态不正确"),
+
     ;
 
     private Integer code;

@@ -7,12 +7,12 @@ import lombok.Getter;
  * 产品状态枚举类
  */
 @Getter
-public enum ProductStatusEnum {
+public enum ProductStatusEnum implements CodeEnum{
 
     UP(0,"在架"),
     DOWN(1,"下架");
 
-    private int code;
+    private Integer code;
 
     private String message;
 

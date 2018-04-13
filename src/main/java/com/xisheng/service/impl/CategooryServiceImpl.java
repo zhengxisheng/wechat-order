@@ -4,6 +4,8 @@ import com.xisheng.dao.ProductCategoryDao;
 import com.xisheng.pojo.ProductCategory;
 import com.xisheng.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,5 +28,20 @@ public class CategooryServiceImpl implements CategoryService {
     @Override
     public List<ProductCategory> findAll() {
         return productCategoryDao.findAll();
+    }
+
+    @Override
+    public Page<ProductCategory> findAll(Pageable pageable) {
+        return productCategoryDao.findAll(pageable);
+    }
+
+    @Override
+    public ProductCategory findOne(Integer categoryId) {
+        return productCategoryDao.findOne(categoryId);
+    }
+
+    @Override
+    public ProductCategory save(ProductCategory productCategory) {
+        return productCategoryDao.save(productCategory);
     }
 }

@@ -38,6 +38,14 @@ public enum ResultEnum {
 
     PRODUCT_STATUS_ERROR(24,"商品状态不正确"),
 
+    Seller_NAME_PASSWORD_NOT_EMPTY(25,"用户名或密码不能为空"),
+
+    Seller_NAME_NOT_EXIT(26,"用户名不存在"),
+
+    Seller_PASSWORD_ERROR(27,"用户密码不对"),
+
+    LOGOUT_SUCCESS(28,"注销成功"),
+
     ;
 
     private Integer code;

@@ -46,6 +46,8 @@ public enum ResultEnum {
 
     LOGOUT_SUCCESS(28,"注销成功"),
 
+    NO_LOGIN(29,"未登录"),
+
     ;
 
     private Integer code;
